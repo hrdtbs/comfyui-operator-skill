@@ -1,18 +1,14 @@
-# comfyui-agent-skills
+# comfyui-operator
 
-A collection of skills (currently featuring comfyui-operator) that enables AI agents to natively interact with a local ComfyUI installation.
+The comfyui-operator skill allows your AI agent (Claude, Cursor, Antigravity, etc.) to natively interact with and control your local ComfyUI installation. It can auto-start the server, interrogate available models/workflows, and dynamically generate images by injecting prompts through the ComfyUI API.
 
-## comfyui-operator
-
-The comfyui-operator skill allows your AI agent (Claude, Cursor, Antigravity, etc.) to control your local ComfyUI instance. It can auto-start the server, interrogate available models/workflows, and dynamically generate images by injecting prompts through the ComfyUI API.
-
-### Installation
+## Installation
 
 ```bash
-npx skills add https://github.com/hrdtbs/comfyui-agent-skills --skill comfyui-operator
+npx skills add https://github.com/hrdtbs/comfyui-operator
 ```
 
-### Prompt Examples
+## Prompt Examples
 
 ```txt
 I want to generate a YouTube thumbnail.
@@ -26,7 +22,7 @@ I want to generate an image.
 
 Agent: Search for API Format workflows and ask the user which one to execute.
 
-### Features
+## Features
 
 - Auto-Detection: Automatically detects both the standard Windows Portable (C:\ComfyUI_windows_portable) and the official ComfyUI Desktop App (via %LOCALAPPDATA% and %APPDATA% configs) without needing manual configuration.
 - Resource Management: Automatically discovers and lists your available Checkpoints, LoRAs, and Workflows (scripts/list_resources.py).
@@ -34,7 +30,7 @@ Agent: Search for API Format workflows and ask the user which one to execute.
 - Prompt Safety: Enforces rules preventing agents from destructively overwriting complex baseline prompts, ensuring tags are safely appended unless explicitly requested otherwise.
 - Seed Safety: Enforces rules preventing agents from randomizing seeds unless batch generation is requested, preserving your workflow's established compositions.
 
-### Constraints & Known Limitations
+## Constraints & Known Limitations
 
 To use this skill effectively, please be aware of the following technical constraints:
 
@@ -49,20 +45,20 @@ To use this skill effectively, please be aware of the following technical constr
    - Due to complex dependency handling and custom node paths deeply integrated within the Electron runtime, headless (background) execution is currently not supported for the Desktop App install. The ComfyUI application window will visibly open.
    - (Users of the Portable zip install running run_nvidia_gpu.bat via scripts can still be launched in the background without a visible UI).
 
-### Usage (For Agents)
+## Usage (For Agents)
 
 Once installed, agents can interact with the skill directly. If you want to use the scripts manually:
 
 ```bash
 # 1. Start ComfyUI Server
-python comfyui-operator/scripts/start_comfyui.py
+python scripts/start_comfyui.py
 
 # 2. Check Available Resources
-python comfyui-operator/scripts/list_resources.py \
+python scripts/list_resources.py \
     --output "<workspace>/.comfyui/resources.json"
 
 # 3. Generate an Image (with dynamic overrides)
-python comfyui-operator/scripts/generate_image.py \
+python scripts/generate_image.py \
     --workflow_path "path/to/workflow_api.json" \
     --output_dir "<workspace>/.comfyui/outputs" \
     --overrides '{"6": {"inputs": {"text": "A beautiful sunset..."}}}'
