@@ -1,11 +1,11 @@
-# comfyui-operator
+# comfyui-operator-skill
 
 The comfyui-operator skill allows your AI agent (Claude, Cursor, Antigravity, etc.) to natively interact with and control your local ComfyUI installation. It can auto-start the server, interrogate available models/workflows, and dynamically generate images by injecting prompts through the ComfyUI API.
 
 ## Installation
 
 ```bash
-npx skills add https://github.com/hrdtbs/comfyui-operator
+npx skills add https://github.com/hrdtbs/comfyui-operator-skill
 ```
 
 ## Prompt Examples
